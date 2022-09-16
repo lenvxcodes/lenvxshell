@@ -1,2 +1,4 @@
 # lenvxshell
-working on this later guys sorry.
+very hard worked program (no joke!)
+other coding platforms maybe comeing soon?
+dunno
