@@ -1,6 +1,21 @@
 kebab = False
-import pkg_resources
+import readline
 import os
+from atexit import register as fn_register
+HISTORY_FILE: str = "sh_history"
+
+if not os.path.isfile(HISTORY_FILE):
+    open(HISTORY_FILE, "w").close()
+
+readline.parse_and_bind("tab: complete")
+
+fn_register(readline.write_history_file, HISTORY_FILE)
+fn_register(readline.read_history_file, HISTORY_FILE)
+
+readline.read_history_file(HISTORY_FILE)
+readline.set_history_length(5000)
+import pkg_resources
+from copy import deepcopy
 print("Welcome to startup..")
 print("Wellcome to DEV release,")
 print("I will check if u have installed the modules. else it wont work.")
@@ -23,7 +38,8 @@ def reg():
         jsons = open("data/data.json", "w")
         dict1 ={"user": username,
             "pass": password,
-            "login": "True"}
+            "login": "True",
+            "prefix": f"{user}$~"}
         ujson.dump(dict1, jsons, indent = 6)
         print("just saved into json file.")
 with open("data/data.json", "r") as cfg:
@@ -34,28 +50,35 @@ if config["login"] == "False":
 print("You are ready to go.")
 if config["login"] == "True":
     user = config["user"]
+    prefix = config["prefix"]
     def terminal():
         kebab = True
-        os.system('clear')
         print(f"Wellcome! {user}")
         print("enter your password.")
         passchk =input("pass: ")
         if passchk == config["pass"]:
+            os.system('clear')
             print("Wellcome back lenvx!")
             while kebab:
-                prefix = f"{user}$~ "
-                sytax: str =input(prefix)
+                sytax: str =input(prefix.replace("{user}", config["user"]))
                 if sytax == 'help':
                     print(f"Commands for {user}:")
                     print("FNX(message)")
-                if sytax == "prefix":
+                    print("CNGprefix > changes prefix")
+                    print("resLNX >> restarts script.")
+                elif sytax == "CNGprefix":
                     print(f"current prefix:{prefix}")
-                if not sytax.startswith("LNX("):
-                    print("Bad value")
-                else:
+                    prefixe =input("prefix:")
+                    config["key"] = "value"
+                    with open("data/data.json", "w") as cfgf:
+                        ujson.dump(config, cfgf, indent=4)
+                elif sytax.startswith("LNX("):
                     print(sytax[4:-1])
+                elif sytax == "resLNX":
+                    print("restarting script...")
+                    os.system('clear && python main.py')
+                    return
         if not passchk == config["pass"]:
             print("Console: Incorrect password.")
 terminal()
 exit()
-
