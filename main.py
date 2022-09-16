@@ -6,6 +6,7 @@
 kebab = False
 import os
 import readline
+LNX_sys = os.system
 from atexit import register as fn_register
 
 HISTORY_FILE: str = "sh_history"
@@ -46,7 +47,7 @@ def reg():
     print("so. what password will u set here?")
     password = input("pass:")
     jsons = open("data/data.json", "w")
-    dict1 = {"user": username, "pass": password, "login": "True", "prefix": f"{user}$~"}
+    dict1 = {"user": username, "pass": password, "login": "True", "prefix": f"{use
     ujson.dump(dict1, jsons, indent=6)
     print("just saved into json file.")
 
@@ -75,8 +76,10 @@ if config["login"] == "True":
                 if sytax == "help":
                     print(f"Commands for {user}:")
                     print("FNX(message)")
-                    print("CNGprefix > changes prefix")
+                    print("CNGprefix >> changes prefix")
                     print("resLNX >> restarts script.")
+                    print("clrhy >> clears history")
+                    print("credits")
                 elif sytax == "CNGprefix":
                     print(f"current prefix:{prefix}")
                     prefixe = input("prefix:")
@@ -100,7 +103,8 @@ if config["login"] == "True":
                     print("Oof.")
         if not passchk == config["pass"]:
             print("Console: Incorrect password.")
-
+            print("Reloading...")
+            return terminal(), LNX_sys('clear')
 
 terminal()
 exit()
