@@ -134,8 +134,9 @@ if config["login"] == "True":
                     print(f"{Fore.BLUE}LNXkill{Fore.GREEN} >> exits the terminal.")
                     print(f"{Fore.BLUE}LenFetch{Fore.GREEN} >> Dev Fetch..")
                     print(f"{Fore.BLUE}FNXpass{Fore.GREEN} >> change password..")
-                    print(f"?Update - whats new?")
-                    print(f"LNXver")
+                    print(f"{Fore.BLUE}FNXuser{Fore.GREEN} >> change user..")
+                    print(f"{Fore.BLUE}?update{Fore.GREEN} >> whats new?")
+                    print(f"{Fore.BLUE}LNXver{Fore.GREEN} >> REpl's ver.")
                     print("ADDED - FNX as admin. in progress!")
                     print(Fore.RESET)
                 elif sytax == "CNGprefix":
@@ -146,7 +147,7 @@ if config["login"] == "True":
                         ujson.dump(config, cfgf, indent=4)
                 elif sytax.startswith("LNX("):
                     print(sytax[4:-1])
-                elif sytax == "resLNX":
+                elif sytax == "resLNX --FORCE":
                     print("restarting script...")
                     os.system("clear && python main.py")
                     return
@@ -183,15 +184,16 @@ if config["login"] == "True":
                 elif sytax == "resLNX -falselogin":
                     print("Redirecting to Repl-LENVX-DEV")
                     time.sleep(2)
-                    return terminal()
+                    return terminal(), LNX_sys('clear')
                 elif sytax == "resLNX -h":
-                    print(f"{Fore.LIGHTBLUE_EX} resLNX - {Fore.RED} restarts script.")
-                    print(f"{Fore.LIGHTBLUE_EX} resLNX -falselogin - {Fore.RED} restarts terminal.")
+                    print(f"{Fore.LIGHTBLUE_EX} resLNX --FORCE - {Fore.RED} restarts script.")
+                    print(f"{Fore.LIGHTBLUE_EX} resLNX -falselogin - {Fore.RED} Clears anything. Makes look like u just logged in.")
+                    print(Fore.RESET)
                 elif sytax == "?update":
                     print("new commands.")
                     print("bugs fixed!")
-                elif sytax == "LNXver"
-                print("DEV.0.1")
+                elif sytax == "LNXver":
+                    print("DEV.0.1")
                 else:
                     print("Oof.")
 login()
