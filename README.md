@@ -10,3 +10,5 @@ Styling.
 Renaming commands
 adding new commands.
 fixing bugs.
+
+will continue when i get better ig
