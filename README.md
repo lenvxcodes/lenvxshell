@@ -12,3 +12,5 @@ adding new commands.
 fixing bugs.
 
 will continue when i get better ig
+DISCONTIUNED PROJECT.
+remade version: lenvxshell2
